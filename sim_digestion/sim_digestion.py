@@ -263,7 +263,6 @@ if __name__=="__main__":
 
     parser = argparse.ArgumentParser(description="Simulated digestion of EpiQuest.")
     parser.add_argument('fasta_filename', help='The Fata filename for simulation.')
-    parser.add_argument('-v', dest='assem_ver', required=True, help='The assembly version. Eg. 19 for hg19.')
     parser.add_argument("-t", dest="seq_type", required=True, choices=["MiniSeq", "RRBS", "MidiSeq", "RRHP", "other"], help="Choose the sequence type.")
     parser.add_argument("-s", dest='recong_sites', default=None, help="If given other in -t, specify the recognition site here. For more than one site separate sequence by comma.")
     parser.add_argument("-c", dest='cut_poss', default=None, help="If given other in -t, specify the recognition site cutting position. For more than one site separate sequence by comma.")
