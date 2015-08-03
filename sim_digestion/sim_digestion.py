@@ -254,7 +254,8 @@ def main(fasta_filename, recong_sites_list, cut_poss_list, size_selection_range,
             ))
 
             if bisulfite_conversion:
-                fragments = [get_bs_seq(f) for f in fragments]
+                fragments = [(s, e, strand, get_bs_seq(f))
+                    for s, e, strand, f in fragments]
 
             write_fastq_files(r1_filename, r2_filename, chrom, fragments, read_len)
 
