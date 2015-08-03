@@ -284,8 +284,8 @@ if __name__=="__main__":
         cut_poss_list = ((1,),)
         bisulfite_conversion = False
     elif args.seq_type == 'other':
-        recong_sites_list = (','.split(args.recong_sites.upper()))
-        cut_poss_list = (','.split(args.cut_poss))
+        recong_sites_list = (args.recong_sites.upper().split(','),)
+        cut_poss_list = (map(int, args.cut_poss.split(',')),)
         bisulfite_conversion = True
     else:
         raise Exception("Unknown seq_type (%s)"%(args.seq_type))
