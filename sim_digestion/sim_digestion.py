@@ -233,7 +233,7 @@ def main(fasta_filename, recong_sites_list, cut_poss_list, size_selection_range,
     r2_filename = '{0}_R2.fastq'.format(os.path.splitext(fasta_filename)[0])
 
     for chrom in fastafile.references:
-        seq = fastafile.fetch(chrom)
+        seq = fastafile.fetch(chrom).upper()
         for recong_sites, cut_poss in zip(recong_sites_list, cut_poss_list):
             fw_sites, rev_sites = get_cutting_sites_in_parallel(
                 seq,
@@ -269,7 +269,6 @@ if __name__=="__main__":
     parser.add_argument("-o", dest="out_dir", default="/mnt/", help="the output dir, which will store the results. (default: /mnt/)")
     parser.add_argument("-r", dest="range_str", default="40,350", help="The gel size selection range (<min>,<max>). default: 40,350")
     parser.add_argument("-l", dest="read_len", default=50, help="The simulated read length. default: 50bp")
-    parser.add_argument("--mail", dest="mail_to", default="b89603112@gmail.com", help="An email will be sent when the program is finished. (default: send email to Hunter)")
     args = parser.parse_args()
 
     if args.seq_type in ("RRBS", "MiniSeq"):
@@ -285,7 +284,7 @@ if __name__=="__main__":
         cut_poss_list = ((1,),)
         bisulfite_conversion = False
     elif args.seq_type == 'other':
-        recong_sites_list = (','.split(args.recong_sites))
+        recong_sites_list = (','.split(args.recong_sites.upper()))
         cut_poss_list = (','.split(args.cut_poss))
         bisulfite_conversion = True
     else:
