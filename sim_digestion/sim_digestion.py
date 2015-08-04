@@ -145,8 +145,9 @@ def write_fastq_files(r1_filename, r2_filename, chrom, fragments, read_len, mode
         read1 = Seq(seq[:read_len])
         record1 = SeqRecord(
             read1,
-            id="%s:%s-%s_%s_1"%(chrom, start, end, strand),
+            id="%s:%s-%s_%s"%(chrom, start, end, strand),
             letter_annotations={"phred_quality": [40]*len(read1)},
+            description='1',
         )
         SeqIO.write(record1, fw1, "fastq")
 
@@ -154,8 +155,9 @@ def write_fastq_files(r1_filename, r2_filename, chrom, fragments, read_len, mode
             read2 = Seq(seq).reverse_complement()[:read_len]
             record2 = SeqRecord(
                 read2,
-                id="%s:%s-%s_%s_2"%(chrom, start, end, strand),
-                letter_annotations={"phred_quality": [40]*len(read2)}
+                id="%s:%s-%s_%s"%(chrom, start, end, strand),
+                letter_annotations={"phred_quality": [40]*len(read2)},
+                description='2',
             )
             SeqIO.write(record2, fw2, "fastq")
     fw1.close()
