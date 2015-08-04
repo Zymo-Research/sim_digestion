@@ -191,14 +191,14 @@ def get_fragments(seq, cutting_sites, size_selection_range, is_reverse):
 
         if size_selection_range[0]<=frag_len<=size_selection_range[1]:
             fragment = seq[start:site]
+            if is_reverse:
+                fragment = str(Seq(fragment).reverse_complement())
+                strand = '-'
+            else:
+                strand = '+'
+            # Need to do reverse complement first.
             if bisulfite_conversion:
                 fragment = get_bs_seq(fragment)
-                if is_reverse:
-                    fragment = str(Seq(fragment).reverse_complement())
-                    strand = '-'
-                else:
-                    strand = '+'
-
             yield start, site, strand, fragment
         start = site
 
