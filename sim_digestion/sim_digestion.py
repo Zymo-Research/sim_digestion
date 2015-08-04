@@ -269,6 +269,7 @@ if __name__=="__main__":
     parser.add_argument("-t", dest="seq_type", required=True, choices=["MiniSeq", "RRBS", "MidiSeq", "RRHP", "other"], help="Choose the sequence type.")
     parser.add_argument("-s", dest='recong_sites', default=None, help="If given other in -t, specify the recognition site here. For more than one site separate sequence by comma.")
     parser.add_argument("-c", dest='cut_poss', default=None, help="If given other in -t, specify the recognition site cutting position. For more than one site separate sequence by comma.")
+    parser.add_argument("-b", dest='bisulfite_conversion', action='store_true', help="Whether to do bisulfite conversion.")
     parser.add_argument("-o", dest="out_dir", default="/mnt/", help="the output dir, which will store the results. (default: /mnt/)")
     parser.add_argument("-r", dest="range_str", default="40,350", help="The gel size selection range (<min>,<max>). default: 40,350")
     parser.add_argument("-l", dest="read_len", default=50, help="The simulated read length. default: 50bp")
@@ -289,7 +290,7 @@ if __name__=="__main__":
     elif args.seq_type == 'other':
         recong_sites_list = (args.recong_sites.upper().split(','),)
         cut_poss_list = (map(int, args.cut_poss.split(',')),)
-        bisulfite_conversion = True
+        bisulfite_conversion = args.bisulfite_conversion
     else:
         raise Exception("Unknown seq_type (%s)"%(args.seq_type))
 
