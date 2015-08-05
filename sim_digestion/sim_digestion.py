@@ -231,8 +231,14 @@ def main(fasta_filename, recong_sites_list, cut_poss_list, size_selection_range,
     import os
 
     fastafile = pysam.Fastafile(fasta_filename)
-    r1_filename = '{0}_R1.fastq'.format(os.path.splitext(fasta_filename)[0])
-    r2_filename = '{0}_R2.fastq'.format(os.path.splitext(fasta_filename)[0])
+    r1_filename = os.path.join(
+        out_dir,
+        '{0}_R1.fastq'.format(os.path.splitext(fasta_filename)[0])
+    )
+    r2_filename = os.path.join(
+        out_dir,
+        '{0}_R2.fastq'.format(os.path.splitext(fasta_filename)[0])
+    )
 
     for chrom in fastafile.references:
         seq = fastafile.fetch(chrom).upper()
